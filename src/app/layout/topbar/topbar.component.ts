@@ -8,6 +8,7 @@ import { AuthCookieService } from '../../features/admin/users/services/auth-cook
 
 @Component({
   selector: 'app-topbar',
+  standalone: true,
   imports: [InitialsPipe],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css',
@@ -24,16 +25,15 @@ export class TopbarComponent {
   email = this.authCookieService.getEmail();
 
   isUserMenuOpen = signal<boolean>(false);
-  breadcrumbs = signal<string[]>(['Soporte', 'Tablero']);
+  breadcrumbs = signal<string[]>(['SoftDevoluciones', 'Inicio']);
 
-  // Diccionario para mapear tus rutas a los textos del breadcrumb
+  // Diccionario actualizado a las rutas corporativas de SoftDevoluciones
   private routeNames: Record<string, string> = {
-    '/ticket-board-page': 'Tablero',
-    '/ticket-form': 'Nuevo ticket',
-    '/all-ticket-page': 'Todos los tickets',
-    '/my-ticket-page': 'Mis tickets',
-    '/knowledge-base': 'Base de conocimiento',
-    '/settings': 'Configuración'
+    '/inicio': 'Inicio',
+    '/mis-compras': 'Mis compras',
+    '/mis-devoluciones': 'Mis devoluciones',
+    '/mi-perfil': 'Mi perfil',
+    '/gestion-devoluciones': 'Gestión de devoluciones'
   };
 
   constructor() {
@@ -41,10 +41,9 @@ export class TopbarComponent {
       filter(event => event instanceof NavigationEnd),
       takeUntilDestroyed()
     ).subscribe((event: NavigationEnd) => {
-
       const currentUrl = event.urlAfterRedirects.split('?')[0];
-      const pageName = this.routeNames[currentUrl] || 'Tablero';
-      this.breadcrumbs.set(['Soporte', pageName]);
+      const pageName = this.routeNames[currentUrl] || 'Inicio';
+      this.breadcrumbs.set(['SoftDevoluciones', pageName]);
     });
   }
 
@@ -63,9 +62,7 @@ export class TopbarComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-
     const target = event.target as HTMLElement;
-
     if (!target.closest('.avatar-container')) {
       this.closeMenu();
     }

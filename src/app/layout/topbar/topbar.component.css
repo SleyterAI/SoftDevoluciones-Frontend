@@ -4,6 +4,7 @@
   background-color: #ffffff;
   border-bottom: 1px solid #e2e8f0;
   font-family: 'Inter', system-ui, sans-serif;
+  box-sizing: border-box;
 }
 
 .topbar {
@@ -24,7 +25,7 @@
 
 .breadcrumbs .active {
   color: #0f172a;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .separator {
@@ -47,27 +48,12 @@
   justify-content: center;
   padding: 8px;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .icon-btn:hover {
-  background-color: #f1f5f9;
-  color: #0f172a;
-}
-
-.topbar-avatar {
-  width: 32px;
-  height: 32px;
-  background-color: #e0e7ff;
-  color: #4f46e5;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-left: 8px;
-  cursor: pointer;
+  background-color: #f8fafc;
+  color: #f97316;
 }
 
 /* --- Contenedor del Avatar --- */
@@ -78,13 +64,24 @@
 }
 
 .topbar-avatar {
-  /* ... tus estilos existentes de .topbar-avatar ... */
+  width: 36px;
+  height: 36px;
+  background-color: #ffedd5;
+  color: #c2410c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 8px;
   cursor: pointer;
+  border: 1.5px solid #fed7aa;
   transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .topbar-avatar:hover {
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); /* Anillo suave al pasar el mouse */
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15); /* Anillo naranja corporativo suave */
 }
 
 .topbar-avatar:active {
@@ -94,13 +91,13 @@
 /* --- Menú Desplegable del Topbar --- */
 .topbar-dropdown {
   position: absolute;
-  top: 120%; /* Se coloca justo debajo del avatar */
+  top: 120%;
   right: 0;
-  width: 220px;
+  width: 240px;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
   padding: 8px 0;
@@ -113,7 +110,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Información del usuario en la cabecera del menú */
 .dropdown-header {
   display: flex;
   flex-direction: column;
@@ -130,13 +126,11 @@
   font-size: 0.75rem;
   color: #64748b;
   margin-top: 2px;
-  /* Trunca correos largos con puntos suspensivos */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Opciones del menú */
 .dropdown-item {
   display: flex;
   align-items: center;
@@ -151,11 +145,12 @@
   text-align: left;
   transition: background-color 0.2s ease, color 0.2s ease;
   font-family: inherit;
+  width: 100%;
 }
 
 .dropdown-item:hover {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #fff7ed;
+  color: #f97316;
 }
 
 .dropdown-item .material-symbols-outlined {
@@ -164,7 +159,7 @@
 }
 
 .dropdown-item:hover .material-symbols-outlined {
-  color: #475569;
+  color: #f97316;
 }
 
 .dropdown-divider {
@@ -173,7 +168,6 @@
   margin: 4px 0;
 }
 
-/* Estilo para cerrar sesión */
 .logout-btn {
   color: #ef4444;
 }
@@ -191,7 +185,6 @@
   color: #dc2626;
 }
 
-/* Por defecto oculto en Desktop */
 .mobile-toggle-btn {
   display: none;
 }
@@ -205,8 +198,8 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    margin-right: 12px; /* Espacio separador con el título */
-    color: #1e293b; /* Color acorde a tu topbar */
+    margin-right: 12px;
+    color: #1e293b;
   }
 
   .mobile-toggle-btn .material-symbols-outlined {
