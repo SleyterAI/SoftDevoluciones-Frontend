@@ -1,0 +1,92 @@
+@if (isMobileMenuOpen()) {
+  <div class="mobile-backdrop" (click)="closeMobileMenu()"></div>
+}
+
+<aside class="sidebar" [class.mobile-open]="isMobileMenuOpen()">
+
+  <!-- Logo y Brand -->
+  <div class="brand">
+    <div class="brand-icon">
+      <span class="material-symbols-outlined">support_agent</span>
+    </div>
+    <span class="brand-name">SoporteYA</span>
+  </div>
+
+  <!-- Selector de Espacio -->
+  <div class="space-selector">
+    <div class="space-icon">OP</div>
+    <div class="space-info">
+      <span class="space-title">Operaciones</span>
+      <span class="space-subtitle">Equipo de soporte</span>
+    </div>
+    <span class="material-symbols-outlined expand-icon">unfold_more</span>
+  </div>
+
+  <nav class="nav-menu">
+    <div class="nav-section">
+      <span class="section-title">GESTIÓN</span>
+      <ul>
+        @for (item of gestionMenu(); track item.id) {
+          <li>
+            <a [routerLink]="item.route"
+              routerLinkActive="active" class="nav-item" (click)="closeMobileMenu()">
+              <span class="material-symbols-outlined">{{ item.icon }}</span>
+              {{ item.label }}
+              @if (item.id === 'todos') {
+                <span class="badge">4</span>
+              }
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="section-title">RECURSOS Y SISTEMA</span>
+      <ul>
+        @for (item of recursosMenu(); track item.id) {
+          <li>
+            <a [routerLink]="item.route"
+              routerLinkActive="active" class="nav-item" (click)="closeMobileMenu()">
+              <span class="material-symbols-outlined">{{ item.icon }}</span>
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Usuario -->
+  <div class="user-profile-container">
+
+    @if (isUserMenuOpen()) {
+      <div class="user-menu-dropdown">
+        <button class="menu-item">
+          <span class="material-symbols-outlined">person</span>
+          Mi perfil
+        </button>
+
+        <div class="menu-divider"></div>
+
+        <button class="menu-item logout-btn" (click)="logout()">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar sesión
+        </button>
+      </div>
+    }
+
+    <!-- perfil -->
+    <div class="user-profile" (click)="toggleUserMenu()">
+      <div class="avatar">{{ user().avatarInitials | initials }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ user().name }}</span>
+        <span class="user-role">{{ user().role }}</span>
+      </div>
+      <span class="material-symbols-outlined more-icon">
+        {{ isUserMenuOpen() ? 'close' : 'more_vert' }}
+      </span>
+    </div>
+
+  </div>
+</aside>

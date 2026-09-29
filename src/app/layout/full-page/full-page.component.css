@@ -1,0 +1,36 @@
+/* bloquea el scroll general del navegador */
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+
+.sidebar-column {
+  flex-shrink: 0;
+  height: 100vh;
+}
+
+
+.content-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* El Topbar no debe encogerse nunca */
+app-topbar {
+  flex-shrink: 0;
+}
+
+/* área que hace scroll */
+.main-scroll-area {
+  flex: 1;
+  overflow-y: auto; /* scroll VERTICAL solo aquí */
+  overflow-x: hidden;
+  padding: 24px;
+  min-height: 0;
+}
