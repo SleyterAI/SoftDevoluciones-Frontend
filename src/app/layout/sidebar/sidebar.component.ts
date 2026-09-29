@@ -13,6 +13,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
   imports: [RouterLink, RouterLinkActive, InitialsPipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
@@ -21,36 +22,34 @@ export class SidebarComponent {
   private readonly authCookieService = inject(AuthCookieService);
   private readonly sidebarState = inject(SidebarMenuService);
   private router = inject(Router);
-  isUserMenuOpen = signal<boolean>(false);
 
+  isUserMenuOpen = signal<boolean>(false);
   isMobileMenuOpen = this.sidebarState.isMobileMenuOpen;
 
   user = signal({
     name: this.authCookieService.getEmail(),
-    role: this.authCookieService.userRole(),
+    role: this.authCookieService.userRole() || 'Cliente',
     avatarInitials: this.authCookieService.getEmail(),
   });
 
-  // Agrupación de menús basada en el diseño
-  private readonly allGestionMenu: MenuItem[] = [
-    { id: 'tablero', label: 'Tablero', icon: 'view_kanban', route: 'ticket-board-page' },
-    { id: 'todos', label: 'Todos los tickets', icon: 'inbox', route: '/all-ticket-page' },
-    { id: 'mis-tickets', label: 'Mis tickets', icon: 'person', route: '/my-ticket-page' }
+  // Menú adaptado al dominio de SoftDevoluciones (Cliente / Operador)
+  private readonly clientMenu: MenuItem[] = [
+    { id: 'inicio', label: 'Inicio', icon: 'home', route: '/inicio' },
+    { id: 'compras', label: 'Mis compras', icon: 'shopping_bag', route: '/mis-compras' },
+    { id: 'devoluciones', label: 'Mis devoluciones', icon: 'assignment_return', route: '/mis-devoluciones' },
+    { id: 'perfil', label: 'Mi perfil', icon: 'person', route: '/mi-perfil' }
+  ];
+
+  private readonly operatorMenu: MenuItem[] = [
+    { id: 'gestion', label: 'Gestión de devoluciones', icon: 'inventory_2', route: '/gestion-devoluciones' },
+    { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin-compras' },
+    { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin-devoluciones' }
   ];
 
   gestionMenu = computed(() => {
     const isAdmin = this.authCookieService.isAdmin();
-    if (isAdmin) {
-      return this.allGestionMenu;
-    } else {
-      return this.allGestionMenu.filter(item => item.id === 'mis-tickets');
-    }
+    return isAdmin ? this.operatorMenu : this.clientMenu;
   });
-
-  recursosMenu = signal<MenuItem[]>([
-    { id: 'base', label: 'Base de conocimiento', icon: 'menu_book', route: '/knowledge-base' },
-    { id: 'config', label: 'Configuración', icon: 'settings', route: '/settings' }
-  ]);
 
   toggleUserMenu() {
     this.isUserMenuOpen.update(open => !open);
@@ -67,9 +66,7 @@ export class SidebarComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-
     const target = event.target as HTMLElement;
-
     if (!target.closest('.user-profile')) {
       this.closeMenu();
     }

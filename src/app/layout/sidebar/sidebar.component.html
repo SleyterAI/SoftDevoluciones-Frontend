@@ -7,47 +7,29 @@
   <!-- Logo y Brand -->
   <div class="brand">
     <div class="brand-icon">
-      <span class="material-symbols-outlined">support_agent</span>
+      <span class="material-symbols-outlined">box</span>
     </div>
-    <span class="brand-name">SoporteYA</span>
+    <span class="brand-name">SoftDevoluciones</span>
   </div>
 
-  <!-- Selector de Espacio -->
+  <!-- Selector de Espacio / Rol -->
   <div class="space-selector">
-    <div class="space-icon">OP</div>
+    <div class="space-icon">SD</div>
     <div class="space-info">
-      <span class="space-title">Operaciones</span>
-      <span class="space-subtitle">Equipo de soporte</span>
+      <span class="space-title">Gestión de Devoluciones</span>
+      <span class="space-subtitle">Sistema corporativo</span>
     </div>
     <span class="material-symbols-outlined expand-icon">unfold_more</span>
   </div>
 
   <nav class="nav-menu">
     <div class="nav-section">
-      <span class="section-title">GESTIÓN</span>
+      <span class="section-title">MENÚ PRINCIPAL</span>
       <ul>
         @for (item of gestionMenu(); track item.id) {
           <li>
             <a [routerLink]="item.route"
-              routerLinkActive="active" class="nav-item" (click)="closeMobileMenu()">
-              <span class="material-symbols-outlined">{{ item.icon }}</span>
-              {{ item.label }}
-              @if (item.id === 'todos') {
-                <span class="badge">4</span>
-              }
-            </a>
-          </li>
-        }
-      </ul>
-    </div>
-
-    <div class="nav-section">
-      <span class="section-title">RECURSOS Y SISTEMA</span>
-      <ul>
-        @for (item of recursosMenu(); track item.id) {
-          <li>
-            <a [routerLink]="item.route"
-              routerLinkActive="active" class="nav-item" (click)="closeMobileMenu()">
+               routerLinkActive="active" class="nav-item" (click)="closeMobileMenu()">
               <span class="material-symbols-outlined">{{ item.icon }}</span>
               {{ item.label }}
             </a>
@@ -62,7 +44,7 @@
 
     @if (isUserMenuOpen()) {
       <div class="user-menu-dropdown">
-        <button class="menu-item">
+        <button class="menu-item" routerLink="/mi-perfil" (click)="closeMenu(); closeMobileMenu()">
           <span class="material-symbols-outlined">person</span>
           Mi perfil
         </button>
@@ -76,7 +58,7 @@
       </div>
     }
 
-    <!-- perfil -->
+    <!-- Perfil inferior -->
     <div class="user-profile" (click)="toggleUserMenu()">
       <div class="avatar">{{ user().avatarInitials | initials }}</div>
       <div class="user-info">
