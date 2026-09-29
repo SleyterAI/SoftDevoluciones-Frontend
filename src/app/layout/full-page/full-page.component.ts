@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { TopbarComponent } from '../topbar/topbar.component';
-import { TicketBoardPageComponent } from '../../features/tickets/pages/ticket-board-page/ticket-board-page.component';
+//import { TicketBoardPageComponent }
 import { RouterOutlet } from '@angular/router';
 
 @Component({
