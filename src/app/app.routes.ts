@@ -57,15 +57,15 @@ export const routes: Routes = [
         component: MyPerfilComponent,
       },
       {
-        path: 'orders',
+        path: 'admin-orders',
         component: OrdersComponent,
       },
       {
-        path: 'returns',
+        path: 'admin-returns',
         component: ReturnsComponent,
       },
       {
-        path: 'users',
+        path: 'admin-users',
         component: UsersComponent,
       },
     ]

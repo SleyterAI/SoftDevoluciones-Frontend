@@ -34,16 +34,16 @@ export class SidebarComponent {
 
   // Menú adaptado al dominio de SoftDevoluciones (Cliente / Operador)
   private readonly clientMenu: MenuItem[] = [
-    { id: 'inicio', label: 'Inicio', icon: 'home', route: '/inicio' },
-    { id: 'compras', label: 'Mis compras', icon: 'shopping_bag', route: '/mis-compras' },
-    { id: 'devoluciones', label: 'Mis devoluciones', icon: 'assignment_return', route: '/mis-devoluciones' },
-    { id: 'perfil', label: 'Mi perfil', icon: 'person', route: '/mi-perfil' }
+    { id: 'inicio', label: 'Inicio', icon: 'home', route: '/start' },
+    { id: 'compras', label: 'Mis compras', icon: 'shopping_bag', route: '/my-orders' },
+    { id: 'devoluciones', label: 'Mis devoluciones', icon: 'assignment_return', route: '/my-returns' },
+    { id: 'perfil', label: 'Mi perfil', icon: 'person', route: '/my-perfil' }
   ];
 
   private readonly operatorMenu: MenuItem[] = [
-    { id: 'gestion', label: 'Gestión de devoluciones', icon: 'inventory_2', route: '/gestion-devoluciones' },
-    { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin-compras' },
-    { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin-devoluciones' }
+    { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin-returns' },
+    { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin-orders' },
+    { id: 'gestion', label: 'Usuarios', icon: 'persons', route: '/admin-users' }
   ];
 
   gestionMenu = computed(() => {
