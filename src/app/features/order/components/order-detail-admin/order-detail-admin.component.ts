@@ -6,13 +6,13 @@ import { OrderService } from "../../services/order.service";
 
 @Component({
   selector: 'app-order-detail',
-  templateUrl: './order-detail.component.html',
-  styleUrl: './order-detail.component.css',
+  templateUrl: './order-detail-admin.component.html',
+  styleUrl: './order-detail-admin.component.css',
   imports: [
     DecimalPipe, RouterLink, CommonModule
   ],
 })
-export class OrderDetailComponent {
+export class OrderDetailAdminComponent {
   private route = inject(ActivatedRoute);
   private orderService = inject(OrderService);
 

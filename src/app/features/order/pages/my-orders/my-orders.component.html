@@ -1,1 +1,43 @@
-<p>my-orders works!</p>
+<div class="content-header">
+  <h2>Mis compras</h2>
+  <p class="section-desc">Aquí puedes ver tus compras realizadas y solicitar devoluciones.</p>
+</div>
+
+<div class="table-container">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nº Compra</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Total</th>
+          <th class="text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (compra of orderResource.value(); track compra.order_id) {
+          <tr>
+            <td class="fw-bold">{{ compra.order_id }}</td>
+            <td>{{ compra.order_date }}</td>
+            <td>
+              <span [ngClass]="getEstadoClass(compra.order_status)">
+                {{ compra.order_status }}
+              </span>
+            </td>
+            <td class="fw-bold">S/ {{ compra.order_total| number:'1.2-2' }}</td>
+            <td class="text-right">
+              <button class="btn-action" (click)="onDetailsClick(compra)">
+                Ver detalles
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty-state">No tienes compras registradas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -8,7 +8,8 @@ import { MyPerfilComponent } from './features/user/components/my-perfil/my-perfi
 import { OrdersComponent } from './features/order/pages/orders/orders.component';
 import { ReturnsComponent } from './features/return/pages/returns/returns.component';
 import { UsersComponent } from './features/user/components/users/users.component';
-import { OrderDetailComponent } from './features/order/components/order-detail/order-detail.component';
+import { OrderDetailAdminComponent } from './features/order/components/order-detail-admin/order-detail-admin.component';
+import { OrderDetailClientComponent } from './features/order/components/order-detail-client/order-detail-client.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'start', component: StartComponent },
       /*{ path: 'ticket-form',component: TicketFormComponent,},*/
       { path: 'my-orders', component: MyOrdersComponent },
+      { path: 'orders/:id', component: OrderDetailClientComponent },
       { path: 'my-returns',component: MyReturnsComponent },
       { path: 'my-perfil',component: MyPerfilComponent },
     ]
@@ -34,7 +36,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'returns', pathMatch: 'full' },
       { path: 'returns', component: ReturnsComponent },
       { path: 'orders', component: OrdersComponent },
-      { path: 'orders/:id', component: OrderDetailComponent },
+      { path: 'orders/:id', component: OrderDetailAdminComponent },
       { path: 'users', component: UsersComponent },
     ]
   }
