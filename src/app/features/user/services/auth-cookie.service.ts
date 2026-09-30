@@ -1,7 +1,7 @@
 import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { LoginRequestDto, LoginResponse, LoginResponseDto } from "../interfaces/login.interface";
 import { Observable, tap } from "rxjs";
 import { HttpClient } from '@angular/common/http';
