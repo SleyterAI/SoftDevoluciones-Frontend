@@ -1,0 +1,229 @@
+/* =========================================
+   CONTENEDOR Y CABECERA
+   ========================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.content-header {
+  margin-bottom: 2rem;
+}
+
+.content-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.025em;
+}
+
+.section-desc {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.table-container > h2 {
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   MENSAJES (Carga y Errores)
+   ========================================= */
+
+.mensaje-box {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mensaje {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.mensaje.error {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   TARJETA DEL PEDIDO
+   ========================================= */
+
+.pedidos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pedido-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pedido-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
+}
+
+
+/* =========================================
+   CABECERA DE LA TARJETA
+   ========================================= */
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.pedido-header h3 {
+  margin: 0 0 0.2rem 0;
+  color: #0f172a;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.pedido-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+
+/* =========================================
+   BADGES / ESTADOS (Estilo Corporativo SoftDevoluciones)
+   ========================================= */
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Estado Entregada / Aprobada */
+.estado-entregado, .badge.success {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+/* Estado En tránsito / Pendiente */
+.estado-pendiente, .estado-preparacion, .badge.warning {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+/* Estado por defecto / Revisión */
+.badge.primary {
+  background-color: #fff7ed;
+  color: #c2410c;
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL PEDIDO (GRID)
+   ========================================= */
+
+.pedido-info {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) 120px;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.info-value {
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.fw-bold {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.total-group {
+  text-align: right;
+}
+
+.price {
+  color: #f97316; /* Naranja corporativo principal */
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 992px) {
+  .pedido-info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .total-group {
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .pedido-card {
+    padding: 1.25rem;
+  }
+
+  .pedido-info {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .pedido-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

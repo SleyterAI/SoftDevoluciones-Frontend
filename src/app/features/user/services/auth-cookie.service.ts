@@ -52,7 +52,7 @@ export class AuthCookieService {
   /* Guardar token en la cookie */
   setToken(token: string) {
     if (isPlatformBrowser(this.platformId)) {
-      // Configuramos la cookie: expira en 1 día (86400 segundos), ruta raíz y segura
+      //expira en 1 día (86400 segundos)
       document.cookie = `access_token=${token}; path=/; max-age=86400; SameSite=Lax`;
       this.tokenSignal.set(token);
     }

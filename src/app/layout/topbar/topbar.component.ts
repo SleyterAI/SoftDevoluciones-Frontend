@@ -4,7 +4,7 @@ import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InitialsPipe } from '../../core/pipes/initials.pipe';
 import { SidebarMenuService } from '../services/sibear-menu.service';
-import { AuthCookieService } from '../../features/admin/users/services/auth-cookie.service';
+import { AuthCookieService } from '../../features/user/services/auth-cookie.service';
 
 @Component({
   selector: 'app-topbar',

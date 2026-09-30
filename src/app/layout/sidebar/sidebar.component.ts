@@ -2,7 +2,7 @@ import { Component, computed, HostListener, inject, signal } from '@angular/core
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { InitialsPipe } from '../../core/pipes/initials.pipe';
 import { SidebarMenuService } from '../services/sibear-menu.service';
-import { AuthCookieService } from '../../features/admin/users/services/auth-cookie.service';
+import { AuthCookieService } from '../../features/user/services/auth-cookie.service';
 
 interface MenuItem {
   id: string;
@@ -41,9 +41,9 @@ export class SidebarComponent {
   ];
 
   private readonly operatorMenu: MenuItem[] = [
-    { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin-returns' },
-    { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin-orders' },
-    { id: 'gestion', label: 'Usuarios', icon: 'persons', route: '/admin-users' }
+    { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin/returns' },
+    { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin/orders' },
+    { id: 'gestion', label: 'Usuarios', icon: 'persons', route: '/admin/users' }
   ];
 
   gestionMenu = computed(() => {

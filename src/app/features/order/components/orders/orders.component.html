@@ -1,0 +1,67 @@
+<div class="content-header">
+  <h1>Gestión de pedidos</h1>
+  <p class="section-desc">Revisa y gestiona los pedidos registrados en el sistema.</p>
+</div>
+
+<div class="table-container">
+  <h2>Pedidos</h2>
+
+  @if (orderResource.isLoading()) {
+    <div class="mensaje-box">
+      <p class="mensaje">Cargando pedidos...</p>
+    </div>
+  }
+
+  @if (orderResource.error()) {
+    <div class="mensaje-box">
+      <p class="mensaje error">{{ orderResource.error() }}</p>
+    </div>
+  }
+
+  @if (orderResource.value(); as orders) {
+    @if (orders.length > 0) {
+      <div class="pedidos-list" draggable="true" (click)="onOrderClick()">
+        @for (pedido of orders; track pedido.order_id) {
+          <div class="pedido-card">
+
+            <div class="pedido-header">
+              <div>
+                <h3>Pedido #{{ pedido.order_id }}</h3>
+                <p>Fecha: {{ pedido.order_date }}</p>
+              </div>
+
+              <!-- Estado del pedido con estilo corporativo -->
+              <span class="badge" [ngClass]="getStatusClass(pedido.order_status)">
+                {{ pedido.order_status }}
+              </span>
+            </div>
+
+            <div class="pedido-info">
+              <div class="info-group">
+                <span class="info-label">Cliente</span>
+                <span class="info-value fw-bold">{{ pedido.user_name }}</span>
+              </div>
+              <div class="info-group">
+                <span class="info-label">Celular</span>
+                <span class="info-value">{{ pedido.order_phoneNumber }}</span>
+              </div>
+              <div class="info-group">
+                <span class="info-label">Dirección</span>
+                <span class="info-value">{{ pedido.order_address }}</span>
+              </div>
+              <div class="info-group total-group">
+                <span class="info-label">Total</span>
+                <span class="info-value price">S/ {{ pedido.order_total | number:'1.2-2' }}</span>
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="mensaje-box">
+        <p class="mensaje">No hay pedidos disponibles.</p>
+      </div>
+    }
+  }
+</div>

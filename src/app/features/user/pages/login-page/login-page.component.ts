@@ -18,8 +18,8 @@ export class LoginPageComponent {
   showPassword = signal<boolean>(false);
 
   loginForm = this.fb.nonNullable.group({
-    email: ['cliente@correo.com', [Validators.required, Validators.email]],
-    password: ['password123', [Validators.required, Validators.minLength(8)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
     rememberMe: [false]
   });
 
@@ -37,8 +37,8 @@ export class LoginPageComponent {
     this.authCookieService.login(request).subscribe({
       next: () => {
         console.log('Inicio exitoso');
-        if (this.authCookieService.isAdmin()) this.router.navigate(['my-orders']);
-        else this.router.navigate(['my-returns']);
+        if (this.authCookieService.isAdmin()) this.router.navigate(['/admin']);
+        else this.router.navigate(['/start']);
       },
       error: (error) => {
         console.error('login-form: ', error);
