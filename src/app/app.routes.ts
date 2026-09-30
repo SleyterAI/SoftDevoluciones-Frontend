@@ -8,6 +8,7 @@ import { MyPerfilComponent } from './features/user/components/my-perfil/my-perfi
 import { OrdersComponent } from './features/order/pages/orders/orders.component';
 import { ReturnsComponent } from './features/return/pages/returns/returns.component';
 import { UsersComponent } from './features/user/components/users/users.component';
+import { OrderDetailComponent } from './features/order/components/order-detail/order-detail.component';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,6 @@ export const routes: Routes = [
     children: [
       { path: '',redirectTo: 'start',pathMatch: 'full' },
       { path: 'start', component: StartComponent },
-      /*{ path: 'ticket/:id',component: TicketDetailPageComponent,},*/
       /*{ path: 'ticket-form',component: TicketFormComponent,},*/
       { path: 'my-orders', component: MyOrdersComponent },
       { path: 'my-returns',component: MyReturnsComponent },
@@ -34,6 +34,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'returns', pathMatch: 'full' },
       { path: 'returns', component: ReturnsComponent },
       { path: 'orders', component: OrdersComponent },
+      { path: 'orders/:id', component: OrderDetailComponent },
       { path: 'users', component: UsersComponent },
     ]
   }

@@ -3,7 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 
-import { RegistroRequestDto, UsuarioRequestDto, UsuarioResponseDto } from "../interfaces/usuario.interface";
+import { UsuarioRequest, UsuarioResponse } from "../interfaces/usuario.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +12,16 @@ export class UserService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/user`;
 
-  createUsuario(request: RegistroRequestDto): Observable<RegistroRequestDto> {
-    return this.http.post<RegistroRequestDto>(`${this.apiUrl}/register`, request);
+  createUsuario(request: UsuarioRequest): Observable<UsuarioRequest> {
+    return this.http.post<UsuarioRequest>(`${this.apiUrl}/register`, request);
   }
 
-  getAllUsuario(): Observable<UsuarioResponseDto[]> {
-    return this.http.get<UsuarioResponseDto[]>(this.apiUrl);
+  getAllUsuario(): Observable<UsuarioResponse[]> {
+    return this.http.get<UsuarioResponse[]>(this.apiUrl);
   }
 
-  promoverAdmin(id: number, role: String): Observable<UsuarioRequestDto> {
-      return this.http.patch<UsuarioRequestDto>(`${this.apiUrl}/${id}/role`, { role });
+  promoverAdmin(id: number, role: String): Observable<UsuarioRequest> {
+      return this.http.patch<UsuarioRequest>(`${this.apiUrl}/${id}/role`, { role });
     }
 
   deleteUsuario(id: number): Observable<void> {

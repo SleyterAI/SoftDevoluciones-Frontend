@@ -1,33 +1,17 @@
 
-export interface Usuario{
-  id?:number;
+export interface UsuarioRequest{
   username:string;
   email:string;
   password:string;
-  role:string;
 }
 
-export interface RegistroRequestDto{
+export interface UsuarioResponse{
+  id:number;
   username:string;
   email:string;
-  password:string;
+  role:string;
 }
 
 export interface RegistroResponseDto{
   message:string;
-}
-
-//admin tabla
-export interface UsuarioRequestDto{
-  id:number;
-  username:string;
-  email:string;
-  role:string;
-}
-
-export interface UsuarioResponseDto{
-  id:number;
-  fullname:string;
-  email:string;
-  role:string;
 }

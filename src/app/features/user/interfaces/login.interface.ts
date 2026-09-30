@@ -1,12 +1,6 @@
-export interface LoginRequestDto{
+export interface LoginRequest{
   email: string;
   password: string;
-}
-
-export interface LoginResponseDto{
-  token: string;
-  email: string;
-  role: string;
 }
 
 export interface LoginResponse{

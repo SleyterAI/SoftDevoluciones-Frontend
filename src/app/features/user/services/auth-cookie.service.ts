@@ -2,7 +2,7 @@ import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../environments/environment';
-import { LoginRequestDto, LoginResponse, LoginResponseDto } from "../interfaces/login.interface";
+import { LoginRequest, LoginResponse } from "../interfaces/login.interface";
 import { Observable, tap } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { JwtPayload } from '../interfaces/jwt.interface';
@@ -41,7 +41,7 @@ export class AuthCookieService {
     return this.userEmail();
   }
 
-  login(request: LoginRequestDto): Observable<LoginResponse> {
+  login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, request)
       .pipe(
         tap(response => {

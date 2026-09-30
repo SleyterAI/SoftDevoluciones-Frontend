@@ -17,8 +17,6 @@ export class OrdersComponent {
   private readonly orderService = inject(OrderService);
   private readonly authCookieService = inject(AuthCookieService);
 
-  order = input.required<OrderResponse>();
-
   readonly orderResource = rxResource({
     stream: () => this.orderService.getAllOrder()
   });
@@ -30,11 +28,10 @@ export class OrdersComponent {
   return 'primary';
 }
 
-onOrderClick() {
+onOrderClick(order: OrderResponse) {
     const role = this.authCookieService.isAdmin();
-
     if (role) {
-      this.router.navigate(['/admin/orders', this.order().order_id]);
+      this.router.navigate(['/admin/orders', order.order_id]);
     } else {
       console.warn('Not access');
     }
