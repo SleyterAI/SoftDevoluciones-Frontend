@@ -1,1 +1,73 @@
-<p>users works!</p>
+<div class="content-header">
+  <div>
+    <h2>Gestión de usuarios</h2>
+    <p class="section-desc">Administra y visualiza los usuarios registrados en el sistema.</p>
+  </div>
+  <button class="btn-primary" (click)="editUser(0)">
+    <span class="material-symbols-outlined">person_add</span>
+    Nuevo usuario
+  </button>
+</div>
+
+<div class="table-container">
+  @if (userResource.isLoading()) {
+    <div class="mensaje-box">
+      <p class="mensaje">Cargando usuarios...</p>
+    </div>
+  } @else if (userResource.error()) {
+    <div class="mensaje-box">
+      <p class="mensaje error">{{ userResource.error() }}</p>
+    </div>
+  } @else {
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of userResource.value(); track user.id) {
+            <tr>
+              <td>{{user.id}}</td>
+              <td>
+                <div class="user-cell-info">
+                  <div class="avatar-circle">
+                    {{ user.username| initials }}
+                  </div>
+                  <div class="user-text-details">
+                    <span class="user-fullname">{{ user.username }}</span>
+                    <span class="user-mail">{{ user.email }}</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge" [ngClass]="getRoleBadgeClass(user.role)">
+                  {{ user.role }}
+                </span>
+              </td>
+
+              <td class="text-right">
+                <div class="actions-group">
+                  <button class="btn-action" (click)="editUser(user.id)" title="Editar">
+                    <span class="material-symbols-outlined">edit</span>
+                  </button>
+                  <button class="btn-action delete" (click)="deleteUser(user.id)" title="Eliminar">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-state">No hay usuarios registrados.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

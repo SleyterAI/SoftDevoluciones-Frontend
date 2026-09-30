@@ -12,11 +12,11 @@ export class UserService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/user`;
 
-  createUsuario(request: UsuarioRequest): Observable<UsuarioRequest> {
+  createUser(request: UsuarioRequest): Observable<UsuarioRequest> {
     return this.http.post<UsuarioRequest>(`${this.apiUrl}/register`, request);
   }
 
-  getAllUsuario(): Observable<UsuarioResponse[]> {
+  getAllUser(): Observable<UsuarioResponse[]> {
     return this.http.get<UsuarioResponse[]>(this.apiUrl);
   }
 
@@ -24,7 +24,7 @@ export class UserService {
       return this.http.patch<UsuarioRequest>(`${this.apiUrl}/${id}/role`, { role });
     }
 
-  deleteUsuario(id: number): Observable<void> {
+  deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
