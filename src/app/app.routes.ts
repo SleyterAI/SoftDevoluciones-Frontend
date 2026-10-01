@@ -10,6 +10,7 @@ import { ReturnsComponent } from './features/return/pages/returns/returns.compon
 import { UsersComponent } from './features/user/components/users/users.component';
 import { OrderDetailAdminComponent } from './features/order/components/order-detail-admin/order-detail-admin.component';
 import { OrderDetailClientComponent } from './features/order/components/order-detail-client/order-detail-client.component';
+import { MyReturnDetailComponent } from './features/return/components/my-return-detail/my-return-detail.component';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,9 @@ export const routes: Routes = [
       { path: 'start', component: StartComponent },
       /*{ path: 'ticket-form',component: TicketFormComponent,},*/
       { path: 'my-orders', component: MyOrdersComponent },
-      { path: 'orders/:id', component: OrderDetailClientComponent },
-      { path: 'my-returns',component: MyReturnsComponent },
+      { path: 'my-orders/:id', component: OrderDetailClientComponent },
+      { path: 'my-returns', component: MyReturnsComponent },
+      { path: 'my-returns/:id', component: MyReturnDetailComponent },
       { path: 'my-perfil',component: MyPerfilComponent },
     ]
   },

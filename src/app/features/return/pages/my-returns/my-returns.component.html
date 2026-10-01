@@ -1,1 +1,47 @@
-<p>my-returns works!</p>
+<div class="content-header">
+  <h2>Mis devoluciones</h2>
+  <p class="section-desc">Aquí puedes ver el estado de tus solicitudes de devolución.</p>
+</div>
+
+<div class="table-container">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nº Solicitud</th>
+          <th>Nº Compra</th>
+          <th>Fecha</th>
+          <th>Productos</th>
+          <th>Estado</th>
+          <th>Total devolución</th>
+          <th class="text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (dev of returnResource.value(); track dev.return_id) {
+          <tr>
+            <td class="fw-bold">{{ dev.return_id }}</td>
+            <td>{{ dev.order_id }}</td>
+            <td>{{ dev.date }}</td>
+            <td>{{ dev.productsQuantity }}</td>
+            <td>
+              <span [ngClass]="getEstadoClass(dev.status)">
+                {{ dev.status }}
+              </span>
+            </td>
+            <td class="fw-bold">S/ {{ dev.returnTotal| number:'1.2-2' }}</td>
+            <td class="text-right">
+              <button class="btn-action" (click)="onDetailsClick(dev)">
+                Ver detalle
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">No tienes solicitudes de devolución registradas.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

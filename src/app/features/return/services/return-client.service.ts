@@ -8,7 +8,7 @@ import { ReturnClientResponse } from '../interfaces/return.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class ReturnService {
+export class ReturnClientService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/return`;
 
