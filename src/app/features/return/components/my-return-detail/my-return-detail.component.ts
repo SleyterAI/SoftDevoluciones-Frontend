@@ -26,8 +26,8 @@ export class MyReturnDetailComponent {
     switch (estado) {
       case 'SOLICITADO': return 'badge success';
       case 'EN_REVISION': return 'badge warning';
-      case 'APROBADO': return 'badge danger';
-      case 'COMPLETADO': return 'badge danger';
+      case 'APROBADO': return 'badge warning';
+      case 'COMPLETADO': return 'badge success';
       case 'RECHAZADO': return 'badge danger';
       default: return 'badge primary';
     }
