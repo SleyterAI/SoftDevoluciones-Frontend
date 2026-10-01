@@ -12,6 +12,7 @@ import { ReturnsComponent } from './features/return/pages/returns/returns.compon
 import { OrdersComponent } from './features/order/pages/orders/orders.component';
 import { OrderDetailAdminComponent } from './features/order/components/order-detail-admin/order-detail-admin.component';
 import { UsersComponent } from './features/user/components/users/users.component';
+import { CreateReturnComponent } from './features/return/components/create-return/create-return.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: 'my-orders/:id', component: OrderDetailClientComponent },
       { path: 'my-returns', component: MyReturnsComponent },
       { path: 'my-returns/:id', component: MyReturnDetailComponent },
+      { path: 'my-orders/create-return/:id', component: CreateReturnComponent },
       { path: 'my-perfil',component: MyPerfilComponent },
     ]
   },

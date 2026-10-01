@@ -1,0 +1,71 @@
+<div class="solicitud-container">
+
+  <!-- Cabecera -->
+  <div class="content-header">
+    <h2>Solicitar devolución</h2>
+    <p class="section-desc">Completa la información de tu solicitud de devolución.</p>
+  </div>
+
+  <div class="solicitud-card">
+
+    <!-- Información del producto seleccionado (Inspirado en el PDF) -->
+    <div class="product-summary-box">
+      <div class="product-info-left">
+        <h4>{{ producto().nombre }}</h4>
+        <p class="text-muted">Precio unitario: S/ {{ producto().precioUnitario | number:'1.2-2' }}</p>
+        <p class="text-muted">Comprados: {{ producto().comprados }}</p>
+      </div>
+      <div class="product-info-right">
+        <span class="badge-available">Disponibles para devolución: <strong>{{ producto().disponibles }}</strong></span>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="devolucionForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- Cantidad a devolver -->
+      <div class="form-group">
+        <label for="cantidad">Cantidad a devolver <span class="max-note">(Máx. {{ producto().maxPermitido }})</span></label>
+        <input
+          id="cantidad"
+          type="number"
+          formControlName="cantidad"
+          min="1"
+          [max]="producto().maxPermitido"
+          [class.is-invalid]="devolucionForm.get('cantidad')?.invalid && devolucionForm.get('cantidad')?.touched"
+        />
+        @if (devolucionForm.get('cantidad')?.invalid && devolucionForm.get('cantidad')?.touched) {
+          <span class="error-msg">Ingresa una cantidad válida (entre 1 y {{ producto().maxPermitido }})</span>
+        }
+      </div>
+
+      <!-- Motivo de devolución -->
+      <div class="form-group">
+        <label for="motivo">Motivo de devolución</label>
+        <select id="motivo" formControlName="motivo">
+          @for (opcion of motivosOpciones; track opcion) {
+            <option [value]="opcion">{{ opcion }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Descripción (opcional / detallada) -->
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          formControlName="descripcion"
+          rows="3"
+          placeholder="Explica brevemente el inconveniente con el producto..."
+        ></textarea>
+      </div>
+
+      <!-- Botones de Acción (Cancelar / Enviar solicitud) -->
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancelar()">Cancelar</button>
+        <button type="submit" class="btn-submit" [disabled]="devolucionForm.invalid">Enviar solicitud</button>
+      </div>
+
+    </form>
+  </div>
+</div>

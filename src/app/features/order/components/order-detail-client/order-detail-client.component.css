@@ -277,3 +277,60 @@
     width: 100%;
   }
 }
+
+/* Ajuste para acomodar el botón dentro de la tarjeta de producto */
+.product-item-card {
+  display: flex;
+  gap: 1.25rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-action-wrapper {
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* Estilo del botón "Solicitar devolución" (Fiel al PDF) */
+.btn-solicitar-dev {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-solicitar-dev:hover {
+  background-color: #ea580c;
+  color: #ffffff;
+  border-color: #ea580c;
+  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.2);
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .product-item-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-action-wrapper {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.75rem;
+  }
+
+  .btn-solicitar-dev {
+    width: 100%;
+    text-align: center;
+  }
+}
