@@ -3,8 +3,11 @@ import { ReturnDetailRequest } from "./return-detail.interface";
 export interface ReturnRequest{
   reason: string;
   comment: string;
-  amount: number;
-  returnDetailRequest: ReturnDetailRequest;
+  quantity: number;
+  orderDetail_id: number;
+}
+
+export interface Return{
 
 }
 

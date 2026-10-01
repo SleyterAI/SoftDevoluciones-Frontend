@@ -18,10 +18,10 @@ export class OrderDetailClientComponent {
   private router = inject(Router);
   private orderService = inject(OrderService);
 
+  order_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   readonly orderResource = rxResource({
     stream: () => {
-      const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-      return this.orderService.getOrderById(id);
+      return this.orderService.getOrderById(this.order_id);
     },
   });
 
@@ -32,7 +32,7 @@ export class OrderDetailClientComponent {
     return 'primary';
   }
 
-  solicitarDevolucion(order: number): void {
-    this.router.navigate(['/my-orders/create-return', order]);
+  solicitarDevolucion(product_id: number): void {
+    this.router.navigate(['/my-orders/create-return', this.order_id, product_id]);
   }
 }

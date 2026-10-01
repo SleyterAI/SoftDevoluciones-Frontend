@@ -6,66 +6,79 @@
     <p class="section-desc">Completa la información de tu solicitud de devolución.</p>
   </div>
 
-  <div class="solicitud-card">
+  @if (orderDetailResource.value(); as order) {
+    <div class="solicitud-layout-grid">
 
-    <!-- Información del producto seleccionado (Inspirado en el PDF) -->
-    <div class="product-summary-box">
-      <div class="product-info-left">
-        <h4>{{ producto().nombre }}</h4>
-        <p class="text-muted">Precio unitario: S/ {{ producto().precioUnitario | number:'1.2-2' }}</p>
-        <p class="text-muted">Comprados: {{ producto().comprados }}</p>
-      </div>
-      <div class="product-info-right">
-        <span class="badge-available">Disponibles para devolución: <strong>{{ producto().disponibles }}</strong></span>
-      </div>
-    </div>
-
-    <!-- Formulario -->
-    <form [formGroup]="devolucionForm" (ngSubmit)="onSubmit()" novalidate>
-
-      <!-- Cantidad a devolver -->
-      <div class="form-group">
-        <label for="cantidad">Cantidad a devolver <span class="max-note">(Máx. {{ producto().maxPermitido }})</span></label>
-        <input
-          id="cantidad"
-          type="number"
-          formControlName="cantidad"
-          min="1"
-          [max]="producto().maxPermitido"
-          [class.is-invalid]="devolucionForm.get('cantidad')?.invalid && devolucionForm.get('cantidad')?.touched"
-        />
-        @if (devolucionForm.get('cantidad')?.invalid && devolucionForm.get('cantidad')?.touched) {
-          <span class="error-msg">Ingresa una cantidad válida (entre 1 y {{ producto().maxPermitido }})</span>
-        }
+      <div class="product-summary-box">
+        <div class="product-img-wrapper">
+          <img [src]="order.product_imageUrl" [alt]="order.product_name" class="product-img" />
+        </div>
+        <div class="product-info-details">
+          <h4>{{ order.product_name }}</h4>
+          <p class="text-muted">Precio unitario: S/ {{ order.orderDetail_unitPrice | number:'1.2-2' }}</p>
+          <p class="text-muted">Comprados: {{ order.orderDetail_quantity }}</p>
+          <p class="text-muted avail-text">Disponibles para devolución: <br><strong>{{ order.orderDetail_quantity }}</strong></p>
+        </div>
       </div>
 
-      <!-- Motivo de devolución -->
-      <div class="form-group">
-        <label for="motivo">Motivo de devolución</label>
-        <select id="motivo" formControlName="motivo">
-          @for (opcion of motivosOpciones; track opcion) {
-            <option [value]="opcion">{{ opcion }}</option>
+      <!-- Columna Derecha: Formulario -->
+      <div class="form-card-wrapper">
+        <form [formGroup]="devolucionForm" (ngSubmit)="createReturn(order.orderDetail_id)" novalidate>
+
+          <!-- Cantidad a devolver -->
+          <div class="form-group horizontal-group">
+            <label for="quantity">Cantidad a devolver</label>
+            <div class="input-with-note">
+              <input
+                id="quantity"
+                type="number"
+                formControlName="quantity"
+                min="1"
+                [max]="order.orderDetail_quantity"
+                [class.is-invalid]="devolucionForm.get('quantity')?.invalid && devolucionForm.get('quantity')?.touched"
+              />
+              <span class="max-note">(Máx. {{ order.orderDetail_quantity }})</span>
+            </div>
+          </div>
+          @if (devolucionForm.get('quantity')?.invalid && devolucionForm.get('quantity')?.touched) {
+            <span class="error-msg">Ingresa una cantidad válida (entre 1 y {{ order.orderDetail_quantity }})</span>
           }
-        </select>
+
+          <!-- Motivo de devolución -->
+          <div class="form-group">
+            <label for="reason">Motivo de devolución</label>
+            <select id="reason" formControlName="reason">
+              @for (opcion of motivosOpciones; track opcion) {
+                <option [value]="opcion">{{ opcion }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Descripción (opcional) -->
+          <div class="form-group">
+            <label for="comment">Descripción (opcional)</label>
+            <textarea
+              id="comment"
+              formControlName="comment"
+              rows="3"
+              placeholder="Explica brevemente el inconveniente con el producto..."
+            ></textarea>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="onCancelar()">Cancelar</button>
+            <button type="submit" class="btn-submit" [disabled]="devolucionForm.invalid">Enviar solicitud</button>
+          </div>
+
+        </form>
       </div>
 
-      <!-- Descripción (opcional / detallada) -->
-      <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <textarea
-          id="descripcion"
-          formControlName="descripcion"
-          rows="3"
-          placeholder="Explica brevemente el inconveniente con el producto..."
-        ></textarea>
-      </div>
+    </div>
+  } @else {
+    <div class="mensaje-box">
+      <p class="loading-text">Cargando información del producto...</p>
+    </div>
+  }
 
-      <!-- Botones de Acción (Cancelar / Enviar solicitud) -->
-      <div class="form-actions">
-        <button type="button" class="btn-cancel" (click)="onCancelar()">Cancelar</button>
-        <button type="submit" class="btn-submit" [disabled]="devolucionForm.invalid">Enviar solicitud</button>
-      </div>
-
-    </form>
-  </div>
 </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { OrderResponse } from '../interfaces/order.interface';
 
 import { environment } from '../../../environments/environment';
+import { OrderDetailResponseDto, OrderDetForProduct } from '../interfaces/order-detail.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,13 @@ export class OrderService {
     return this.http.get<OrderResponse>(`${this.apiUrl}/${id}`);
   }
 
-  getAllClientOrder(): Observable<OrderResponse[]>{
+  getAllClientOrder(): Observable<OrderResponse[]> {
     return this.http.get<OrderResponse[]>(`${this.apiUrl}/my-orders`);
+  }
+
+  //client
+  getOrderDetailByOrderIdAndProductId(orderId: number, productId: number): Observable<OrderDetailResponseDto> {
+    return this.http.get<OrderDetailResponseDto>(`${this.apiUrl}/product/${orderId}/${productId}`);
   }
 
 }

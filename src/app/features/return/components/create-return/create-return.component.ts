@@ -1,7 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReturnClientService } from '../../services/return-client.service';
+import { ReturnRequest } from '../../interfaces/return.interface';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { OrderService } from '../../../order/services/order.service';
 
 @Component({
   selector: 'app-solicitar-devolucion',
@@ -11,23 +15,31 @@ import { Router } from '@angular/router';
 })
 export class CreateReturnComponent {
   private fb = inject(NonNullableFormBuilder);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  // Datos de ejemplo del producto que se está devolviendo (según el PDF Interfaz 4)
-  producto = signal({
-    nombre: 'Mouse Logitech M330',
-    precioUnitario: 80.00,
-    comprados: 2,
-    disponibles: 2,
-    maxPermitido: 2,
-    imagen: 'assets/mouse.jpg' // O url de ejemplo
+  private readonly returnClientService = inject(ReturnClientService);
+  private readonly orderService = inject(OrderService);
+
+  order_id = Number(
+    this.route.snapshot.paramMap.get('orderId')
+  );
+
+  product_id = Number(
+    this.route.snapshot.paramMap.get('productId')
+  );
+
+  readonly orderDetailResource = rxResource({
+    stream: () => {
+      return this.orderService.getOrderDetailByOrderIdAndProductId(this.order_id, this.product_id);
+    },
   });
 
   // Formulario reactivo moderno
   devolucionForm = this.fb.group({
-    cantidad: [1, [Validators.required, Validators.min(1), Validators.max(2)]],
-    motivo: ['Producto defectuoso', [Validators.required]],
-    descripcion: ['El clic derecho no funciona correctamente.', [Validators.required]]
+    quantity: [1, [Validators.required, Validators.min(1), Validators.max(2)]],
+    reason: ['Producto defectuoso', [Validators.required]],
+    comment: ['El clic derecho no funciona correctamente.', [Validators.required]]
   });
 
   motivosOpciones = [
@@ -37,30 +49,34 @@ export class CreateReturnComponent {
     'Piezas o accesorios faltantes'
   ];
 
-  onSubmit(): void {
+
+  createReturn(orderDetail_id: number) {
     if (this.devolucionForm.invalid) {
       this.devolucionForm.markAllAsTouched();
       return;
     }
+    const formValues = this.devolucionForm.getRawValue();
 
-    const formData = this.devolucionForm.getRawValue();
-    console.log('Enviando solicitud de devolución:', formData);
+    const request: ReturnRequest = {
+      orderDetail_id: orderDetail_id,
+      quantity: formValues.quantity,
+      reason: formValues.reason,
+      comment: formValues.comment
+    };
 
-    // Simulación de envío exitoso y redirección
-    // this.router.navigate(['/mis-devoluciones']);
+    this.returnClientService.createReturn(request)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/my-returns']);
+          console.log("return creado")
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
 
   onCancelar(): void {
     this.router.navigate(['/my-orders']);
   }
-
-  //how this shit works
-  /**
-   * enviamos order_id y product_id de order_detail a create-return
-   * ahi usamos ambos id para buscar en un metodo con 2 parametros <-
-   * enviamos al backend y que responda con los del producto de la order exacta
-   * de ahi cargamos esos datos en la interfaz
-   * ----ver como crear el return<-------
-   */
-
 }

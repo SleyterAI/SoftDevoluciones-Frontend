@@ -1,17 +1,7 @@
 
-
-/*
-export interface OrderDetail {
-  id?:number;
-  quantity:number;
-  unitPrice: number;
-  subTotal:number;
-  product: Product;
-}*/
-
-//implemented
 export interface OrderDetailResponseDto{
   //order detail
+  orderDetail_id: number;
   orderDetail_quantity: number;
   orderDetail_unitPrice: number;
   orderDetail_subTotal: number;
@@ -35,4 +25,9 @@ export interface OrderDetailResponseDto{
   order_date: string;
   order_status: string;
   order_total: number;
+}
+
+export interface OrderDetForProduct {
+  orderId: number;
+  productId: number;
 }

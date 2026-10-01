@@ -30,7 +30,7 @@ export const routes: Routes = [
       { path: 'my-orders/:id', component: OrderDetailClientComponent },
       { path: 'my-returns', component: MyReturnsComponent },
       { path: 'my-returns/:id', component: MyReturnDetailComponent },
-      { path: 'my-orders/create-return/:id', component: CreateReturnComponent },
+      { path: 'my-orders/create-return/:orderId/:productId', component: CreateReturnComponent },
       { path: 'my-perfil',component: MyPerfilComponent },
     ]
   },

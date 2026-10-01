@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { ReturnClientResponse } from '../interfaces/return.interface';
+import { ReturnClientResponse, ReturnRequest } from '../interfaces/return.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class ReturnClientService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/return`;
 
-  createReturn(){
-    //sooon¡¡
+  createReturn(request: ReturnRequest): Observable<ReturnRequest>{
+    return this.http.post<ReturnRequest>(this.apiUrl, request);
   }
 
   getClientReturn(): Observable<ReturnClientResponse[]>{
