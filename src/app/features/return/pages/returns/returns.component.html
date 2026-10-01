@@ -1,1 +1,85 @@
-<p>returns works!</p>
+<div class="content-header">
+  <div>
+    <h2>Gestión de devoluciones</h2>
+    <p class="section-desc">Revisa y gestiona las solicitudes de devolución de los clientes.</p>
+  </div>
+</div>
+
+<!-- Barra de Filtros -->
+<div class="filters-bar">
+  <div class="filter-group">
+    <label>Estado</label>
+    <select [value]="selectedEstado()" (change)="selectedEstado.set($any($event.target).value)">
+      @for (est of estadosList; track est.value) {
+        <option [value]="est.value">{{ est.label }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Fecha desde</label>
+    <input type="date" [value]="fechaDesde()" (change)="fechaDesde.set($any($event.target).value)" />
+  </div>
+
+  <div class="filter-group">
+    <label>Fecha hasta</label>
+    <input type="date" [value]="fechaHasta()" (change)="fechaHasta.set($any($event.target).value)" />
+  </div>
+
+  <!-- El único que actualiza los datos de la tabla -->
+  <div class="filter-group btn-search-wrapper">
+    <button class="btn-search" (click)="onSearch()">
+      <span class="material-symbols-outlined">search</span>
+      Buscar
+    </button>
+  </div>
+</div>
+
+<div class="table-container">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nº Solicitud</th>
+          <th>Cliente</th>
+          <th>Nº Compra</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Total</th>
+          <th class="text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (dev of returnResource.value(); track dev.return_id) {
+          <tr>
+            <td class="fw-bold">{{ dev.return_id }}</td>
+            <td>{{ dev.user_name }}</td>
+            <td>{{ dev.order_id }}</td>
+            <td>{{ dev.date | dateFormat }}</td>
+            <td>
+              <span class="badge" [ngClass]="getEstadoClass(dev.status)">
+                {{ dev.status }}
+              </span>
+            </td>
+            <td class="fw-bold">S/ {{ dev.returnTotal | number:'1.2-2' }}</td>
+            <td class="text-right">
+              @if (esRevisable(dev.status)) {
+                <button class="btn-action revisar">
+                  Revisar
+                </button>
+              } @else {
+                <button class="btn-action ver">
+                  Ver
+                </button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-state">No se encontraron solicitudes de devolución.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
