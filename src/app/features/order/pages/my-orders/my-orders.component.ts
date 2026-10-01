@@ -34,6 +34,6 @@ export class MyOrdersComponent {
   }
 
   onDetailsClick(order: OrderResponse) {
-      this.router.navigate(['/orders', order.order_id]);
+      this.router.navigate(['/my-orders', order.order_id]);
   }
 }
