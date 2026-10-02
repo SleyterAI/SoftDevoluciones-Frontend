@@ -47,7 +47,7 @@ export class ReturnsComponent {
   estadosList = [
     { value: 'TODOS', label: 'Todos' },
     { value: 'SOLICITADO', label: 'Solicitado' },
-    { value: 'EN_REVISION', label: 'En revisión' },
+    { value: 'EN_REVISION', label: 'En revision' },
     { value: 'APROBADO', label: 'Aprobado' },
     { value: 'RECHAZADO', label: 'Rechazado' },
     { value: 'COMPLETADO', label: 'Completado' }
@@ -86,23 +86,20 @@ export class ReturnsComponent {
 
   esRevisable(status: string): boolean {
     const st = status?.toLowerCase() || '';
-    return st === 'en_revision' || st === 'solicitada';
+    return st === 'solicitado' || st === 'en_revision'|| st === 'aprobado';
   }
 
-  // Se ejecuta estrictamente al hacer clic en el botón "Buscar"
   onSearch(): void {
     const estado = this.selectedEstado();
     const desde = this.fechaDesde();
     const hasta = this.fechaHasta();
 
-    // Función auxiliar para transformar de YYYY-MM-DD a DD-MM-YYYY
     const formatDate = (dateStr: string) => {
       if (!dateStr) return undefined;
       const [year, month, day] = dateStr.split('-');
       return `${day}-${month}-${year}`;
     };
 
-    // Actualizamos la señal que dispara el rxResource con los valores formateados
     this.appliedFilters.set({
       status: estado === 'TODOS' ? undefined : estado,
       fromDate: formatDate(desde),

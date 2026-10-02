@@ -11,6 +11,10 @@ export interface ReturnEstadoRequest{
   estado: string;
 }
 
+export interface NoteRequest{
+  notes: string;
+}
+
 export interface ReturnClientResponse{
   return_id: number;
   order_id: number;
@@ -27,4 +31,5 @@ export interface ReturnAdminResponse{
   date: string;
   status: string;
   returnTotal: number;
+  operatorNotes: string;
 }

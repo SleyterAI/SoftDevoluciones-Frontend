@@ -78,10 +78,10 @@
       <!-- Paso 4: Completado o Rechazado -->
       <div class="step-item" [ngClass]="getStepStatus('COMPLETADO', ret.status)">
         <div class="step-circle">
-          @if (getStepStatus('COMPLETADO', ret.status) === 'completed') {
+          @if (ret.status === 'RECHAZADO') {
+          <span class="material-symbols-outlined check-icon text-white">close</span>
+          } @else if (getStepStatus('COMPLETADO', ret.status) === 'completed') {
           <span class="material-symbols-outlined check-icon">check</span>
-          } @else if (ret.status === 'RECHAZADO') {
-          <span class="material-symbols-outlined check-icon text-danger">close</span>
           } @else {
           <span>4</span>
           }
@@ -104,9 +104,20 @@
           <h3>Resumen de la solicitud</h3>
         </div>
         <div class="card-body">
-          <div class="info-row-main">
-            <span class="meta-label">Monto Total de Devolución</span>
-            <span class="meta-value total-highlight">S/ {{ ret.returnTotal | number:'1.2-2' }}</span>
+          <div class="info-grid-columns">
+
+            <!-- Columna Izquierda: Monto Total -->
+            <div class="info-column">
+              <span class="meta-label">Monto Total de Devolución</span>
+              <span class="meta-value total-highlight">S/ {{ ret.returnTotal | number:'1.2-2' }}</span>
+            </div>
+
+            <!-- Columna Derecha: Notas del operador -->
+            <div class="info-column">
+              <span class="meta-label">Notas del operador</span>
+              <span class="meta-value operator-notes-text">{{ ret.operatorNotes || 'Sin notas registradas' }}</span>
+            </div>
+
           </div>
         </div>
 
@@ -121,6 +132,19 @@
           <div class="meta-group">
             <span class="meta-label">Nº de Compra</span>
             <span class="meta-value">#{{ ret.order_id }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div class="card-header">
+          <h3>Dejar una nota de la devolución:</h3>
+        </div>
+        <div class="card-body">
+          <div class="info-row-main">
+            <span class="meta-label">Notas del operador: </span>
+            <input type="text" [(ngModel)]="operatorNotes" placeholder="Escribe una nota..." />
+            <button (click)="updateOperatorNotes(operatorNotes)">Actualizar</button>
           </div>
         </div>
       </div>
@@ -152,29 +176,29 @@
         <div class="meta-actions">
 
           @if (ret.status === 'SOLICITADO') {
-            <button class="btn-primary" (click)="cambiarEstado('EN_REVISION')">
-              <span class="material-symbols-outlined">play_arrow</span>
-              Pasar a En Revisión
-            </button>
+          <button class="btn-primary" (click)="cambiarEstado('EN_REVISION')">
+            <span class="material-symbols-outlined">play_arrow</span>
+            Pasar a En Revisión
+          </button>
           }
 
           @if (ret.status === 'EN_REVISION') {
-            <button class="btn-primary" (click)="cambiarEstado('APROBADO')">
-              <span class="material-symbols-outlined">check_circle</span>
-              Aprobar devolución
-            </button>
+          <button class="btn-primary" (click)="cambiarEstado('APROBADO')">
+            <span class="material-symbols-outlined">check_circle</span>
+            Aprobar devolución
+          </button>
           }
 
           @if (ret.status === 'APROBADO') {
-            <button class="btn-success" (click)="cambiarEstado('COMPLETADO')">
-              <span class="material-symbols-outlined">done_all</span>
-              Marcar como Completado
-            </button>
+          <button class="btn-success" (click)="cambiarEstado('COMPLETADO')">
+            <span class="material-symbols-outlined">done_all</span>
+            Marcar como Completado
+          </button>
 
-            <button class="btn-outline text-danger" (click)="cambiarEstado('RECHAZADO')">
-              <span class="material-symbols-outlined">cancel</span>
-              Marcar como Rechazado
-            </button>
+          <button class="btn-outline text-danger" (click)="cambiarEstado('RECHAZADO')">
+            <span class="material-symbols-outlined">cancel</span>
+            Marcar como Rechazado
+          </button>
           }
 
           <button class="btn-outline">Editar notas internas</button>
@@ -188,7 +212,11 @@
 </div>
 
 @if (showToastEstado()) {
-<app-toast title="¡Estado actualizado!"
-  message="Se actualizó el estado de la devolución correctamente.">
+<app-toast title="¡Estado actualizado!" message="Se actualizó el estado de la devolución correctamente.">
+</app-toast>
+}
+
+@if (showToastNotas()) {
+<app-toast title="¡Notas del operador!" message="Actualizado">
 </app-toast>
 }

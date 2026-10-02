@@ -13,7 +13,7 @@ export class ReturnAdminService {
   private apiUrl = `${environment.apiUrl}/admin/return`;
 
 
-  getAllAdminReturn(): Observable<ReturnAdminResponse[]>{
+  getAllAdminReturn(): Observable<ReturnAdminResponse[]> {
     return this.http.get<ReturnAdminResponse[]>(this.apiUrl);
   }
 
@@ -22,7 +22,7 @@ export class ReturnAdminService {
   }
 
   getReturnsWithFilters(status?: string, fromDate?: string, toDate?: string):
-                            Observable<ReturnAdminResponse[]> {
+    Observable<ReturnAdminResponse[]> {
     let params = new HttpParams();
 
     if (status) params = params.set('status', status);
@@ -34,5 +34,9 @@ export class ReturnAdminService {
 
   updateReturnStatus(id: number, newStatus: string): Observable<string> {
     return this.http.patch(`${this.apiUrl}/${id}/status`, { status: newStatus }, { responseType: 'text' });
+  }
+
+  updateOperatorNotes(id: number, NoteRequest: string): Observable<string> {
+    return this.http.patch(`${this.apiUrl}/${id}/notes`, { notes: NoteRequest }, { responseType: 'text' });
   }
 }

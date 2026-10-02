@@ -380,6 +380,10 @@
   font-weight: bold;
 }
 
+.text-danger {
+  color: #ef4444 !important;
+}
+
 .step-label {
   font-size: 0.7rem;
   font-weight: 600;
@@ -404,6 +408,12 @@
   color: white;
 }
 
+.step-item.noCompleted .step-circle {
+  background-color: #bc291b;
+  border-color: #bc291b;
+  color: white;
+}
+
 .step-item.completed .step-label {
   color: #0f172a;
 }
@@ -424,4 +434,82 @@
 /* Línea Conectora Verde */
 .step-line.active {
   background-color: #10b981;
+}
+
+/* Estilo moderno para el input de texto */
+.info-row-main input[type="text"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: #1f2937;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.info-row-main input[type="text"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.info-row-main input[type="text"]::placeholder {
+  color: #9ca3af;
+}
+
+/* Botón de actualizar */
+.info-row-main button {
+  padding: 10px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.info-row-main button:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.info-row-main button:active {
+  background-color: #1e40af;
+}
+
+/* Contenedor en 2 columnas */
+.info-grid-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* Cada columna individual */
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Estilo para el texto de notas por si es largo */
+.operator-notes-text {
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* Responsive: en pantallas pequeñas pasa a una sola columna */
+@media (max-width: 600px) {
+  .info-grid-columns {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
