@@ -1,10 +1,10 @@
 <div class="content-header">
-  <h1>Gestión de pedidos</h1>
+  <h1>Gestión de compras</h1>
   <p class="section-desc">Revisa y gestiona los pedidos registrados en el sistema.</p>
 </div>
 
 <div class="table-container">
-  <h2>Pedidos</h2>
+  <h2>Compras</h2>
 
   @if (orderResource.isLoading()) {
     <div class="mensaje-box">
@@ -26,7 +26,7 @@
 
             <div class="pedido-header">
               <div>
-                <h3>Pedido #{{ pedido.order_id }}</h3>
+                <h3>Compra #{{ pedido.order_id }}</h3>
                 <p>Fecha: {{ pedido.order_date }}</p>
               </div>
 

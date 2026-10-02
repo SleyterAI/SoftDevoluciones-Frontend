@@ -43,7 +43,7 @@ export class SidebarComponent {
   private readonly operatorMenu: MenuItem[] = [
     { id: 'devoluciones-admin', label: 'Devoluciones', icon: 'sync_alt', route: '/admin/returns' },
     { id: 'compras-admin', label: 'Compras', icon: 'receipt_long', route: '/admin/orders' },
-    { id: 'gestion', label: 'Usuarios', icon: 'persons', route: '/admin/users' }
+    { id: 'gestion', label: 'Usuarios', icon: 'person', route: '/admin/users' }
   ];
 
   gestionMenu = computed(() => {

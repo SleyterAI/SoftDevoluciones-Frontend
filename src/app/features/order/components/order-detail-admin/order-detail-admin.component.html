@@ -1,9 +1,9 @@
 <div class="order-detail-container">
-  <button class="btn-back" routerLink="/admin/orders">← Volver a pedidos</button>
+  <button class="btn-back" routerLink="/admin/orders">← Volver a compras</button>
 
   @if (orderResource.isLoading()) {
     <div class="mensaje-box">
-      <p class="mensaje">Cargando detalles del pedido...</p>
+      <p class="mensaje">Cargando detalles de compras...</p>
     </div>
   } @else {
     @if (orderResource.value(); as order) {
@@ -12,7 +12,7 @@
         <!-- Cabecera Principal -->
         <div class="detail-header">
           <div>
-            <h2>Pedido #{{ order.order_id }}</h2>
+            <h2>Compra #{{ order.order_id }}</h2>
             <p class="order-date">Fecha: <strong>{{ order.order_date }}</strong></p>
           </div>
           <span class="badge" [ngClass]="getStatusClass(order.order_status)">
