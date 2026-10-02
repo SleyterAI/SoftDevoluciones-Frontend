@@ -4,10 +4,11 @@ import { ReturnClientService } from '../../services/return-client.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReturnClientResponse } from '../../interfaces/return.interface';
+import { DateFormatPipe } from '../../../../core/pipes/date-format.pipe';
 
 @Component({
   selector: 'app-my-returns',
-  imports: [CommonModule],
+  imports: [CommonModule, DateFormatPipe],
   templateUrl: './my-returns.component.html',
   styleUrl: './my-returns.component.css',
 })

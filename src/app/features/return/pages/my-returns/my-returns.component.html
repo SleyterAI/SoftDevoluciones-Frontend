@@ -22,7 +22,7 @@
           <tr>
             <td class="fw-bold">{{ dev.return_id }}</td>
             <td>{{ dev.order_id }}</td>
-            <td>{{ dev.date }}</td>
+            <td>{{ dev.date | dateFormat }}</td>
             <td>{{ dev.productsQuantity }}</td>
             <td>
               <span [ngClass]="getEstadoClass(dev.status)">
