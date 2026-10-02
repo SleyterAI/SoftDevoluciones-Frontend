@@ -22,8 +22,8 @@ export class ReturnsComponent {
   private readonly returnAdminService = inject(ReturnAdminService);
 
   selectedEstado = signal<string>('TODOS');
-  fechaDesde = signal<string>('2024-09-01');
-  fechaHasta = signal<string>('2024-09-30');
+  fechaDesde = signal<string>('2026-08-01');
+  fechaHasta = signal<string>('2026-09-30');
   searchTerm = signal<string>('');
 
   private appliedFilters = signal<FilterCriteria>({});
