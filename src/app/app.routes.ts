@@ -13,6 +13,8 @@ import { OrdersComponent } from './features/order/pages/orders/orders.component'
 import { OrderDetailAdminComponent } from './features/order/components/order-detail-admin/order-detail-admin.component';
 import { UsersComponent } from './features/user/components/users/users.component';
 import { CreateReturnComponent } from './features/return/components/create-return/create-return.component';
+import { CheckDetailComponent } from './features/return/components/check-detail/check-detail.component';
+import { ViewDetailComponent } from './features/return/components/view-detail/view-detail.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +41,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'returns', pathMatch: 'full' },
       { path: 'returns', component: ReturnsComponent },
+      { path: 'returns/check-detail/:id', component: CheckDetailComponent },
+      { path: 'returns/view-detail/:id', component: ViewDetailComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'orders/:id', component: OrderDetailAdminComponent },
       { path: 'users', component: UsersComponent },

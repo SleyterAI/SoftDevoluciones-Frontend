@@ -1,0 +1,193 @@
+<div class="page-container">
+
+  <a routerLink="/admin/returns" class="back-link">
+    <span class="material-symbols-outlined">arrow_back</span>
+    Volver a la gestión de devoluciones
+  </a>
+
+  @if (returnResource.isLoading()) {
+  <div class="state-message">
+    <span class="material-symbols-outlined spin-icon">sync</span>
+    Cargando detalles de la devolución...
+  </div>
+  } @else if (returnResource.error()) {
+  <div class="state-message error">
+    <span class="material-symbols-outlined">error</span>
+    No se pudo cargar la información de la devolución.
+  </div>
+  } @else if (returnResource.value(); as ret) {
+
+  <!-- Cabecera -->
+  <div class="ticket-header">
+    <div class="title-row">
+      <h2>Devolución #{{ ret.return_id }}</h2>
+      <div class="status-badge">
+        <span class="status-dot" [ngClass]="(ret.status || '').toLowerCase()"></span>
+        {{ ret.status || 'SOLICITADO' }}
+      </div>
+    </div>
+    <p class="ticket-id">Pedido asociado: #{{ ret.order_id }}</p>
+  </div>
+
+  <!-- Step Indicator Horizontal para Devoluciones -->
+  <div class="step-indicator-container">
+    <div class="steps-wrapper">
+
+      <!-- Paso 1: Solicitado -->
+      <div class="step-item"
+        [ngClass]="getStepStatus('SOLICITADO', ret.status)">
+        <div class="step-circle">
+          @if (getStepStatus('SOLICITADO', ret.status) === 'completed') {
+          <span class="material-symbols-outlined check-icon">check</span>
+          } @else {
+          <span>1</span>
+          }
+        </div>
+        <span class="step-label">Solicitado</span>
+      </div>
+
+      <div class="step-line"
+        [ngClass]="{'active': isStepPassed('SOLICITADO', ret.status)}"></div>
+
+      <!-- Paso 2: En Revisión -->
+      <div class="step-item"
+        [ngClass]="getStepStatus('EN_REVISION', ret.status)">
+        <div class="step-circle">
+          @if (getStepStatus('EN_REVISION', ret.status) === 'completed') {
+          <span class="material-symbols-outlined check-icon">check</span>
+          } @else {
+          <span>2</span>
+          }
+        </div>
+        <span class="step-label">En Revisión</span>
+      </div>
+
+      <div class="step-line"
+        [ngClass]="{'active': isStepPassed('EN_REVISION', ret.status)}"></div>
+
+      <!-- Paso 3: Aprobado / Rechazado -->
+      <div class="step-item"
+        [ngClass]="getStepStatus('APROBADO', ret.status)">
+        <div class="step-circle">
+          @if (getStepStatus('APROBADO', ret.status) === 'completed') {
+          <span class="material-symbols-outlined check-icon">check</span>
+          } @else {
+          <span>3</span>
+          }
+        </div>
+        <span class="step-label">Aprobado</span>
+      </div>
+
+      <div class="step-line"
+        [ngClass]="{'active': isStepPassed('APROBADO', ret.status)}"></div>
+
+      <!-- Paso 4: Completado -->
+      <div class="step-item"
+        [ngClass]="getStepStatus('COMPLETADO', ret.status)">
+        <div class="step-circle">
+          @if (getStepStatus('COMPLETADO', ret.status) === 'completed') {
+          <span class="material-symbols-outlined check-icon">check</span>
+          } @else {
+          <span>4</span>
+          }
+        </div>
+        <span class="step-label">Completado</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Layout Dividido -->
+  <div class="ticket-layout">
+
+    <!-- Columna Principal -->
+    <div class="main-column">
+      <div class="detail-card">
+        <div class="card-header">
+          <h3>Resumen de la solicitud</h3>
+        </div>
+        <div class="card-body">
+          <div class="info-row-main">
+            <span class="meta-label">Monto Total de Devolución</span>
+            <span class="meta-value total-highlight">S/ {{ ret.returnTotal | number:'1.2-2' }}</span>
+          </div>
+        </div>
+
+        <div class="card-inner-divider"></div>
+
+        <div class="card-footer-info">
+          <div class="meta-group">
+            <span class="meta-label">Nº de Solicitud</span>
+            <span class="meta-value">#{{ ret.return_id }}</span>
+          </div>
+
+          <div class="meta-group">
+            <span class="meta-label">Nº de Compra</span>
+            <span class="meta-value">#{{ ret.order_id }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna Lateral (Propiedades y Acciones del Operador) -->
+    <div class="sidebar-column">
+      <div class="detail-card meta-card">
+
+        <!-- Solicitante -->
+        <div class="meta-group">
+          <span class="meta-label">Cliente</span>
+          <div class="user-info-row">
+            <div class="avatar-small">{{ getInitials(ret.user_name) }}</div>
+            <span class="meta-value">{{ ret.user_name || 'Cliente' }}</span>
+          </div>
+        </div>
+
+        <div class="meta-divider"></div>
+
+        <div class="meta-group">
+          <span class="meta-label">Fecha de solicitud</span>
+          <span class="meta-value">{{ ret.date | date:'dd/MM/yyyy, HH:mm' }}</span>
+        </div>
+
+        <div class="meta-divider"></div>
+
+        <!-- Acciones del operador basadas en los estados del Enum -->
+        <div class="meta-actions">
+
+          @if (ret.status === 'SOLICITADO' || ret.status === 'EN_REVISION') {
+          <button class="btn-primary"
+            (click)="cambiarEstado('APROBADO')">
+            <span class="material-symbols-outlined">check_circle</span>
+            Aprobar devolución
+          </button>
+
+          <button class="btn-outline text-danger"
+            (click)="cambiarEstado('RECHAZADO')">
+            <span class="material-symbols-outlined">cancel</span>
+            Rechazar devolución
+          </button>
+          }
+
+          @if (ret.status === 'APROBADO') {
+          <button class="btn-success"
+            (click)="cambiarEstado('COMPLETADO')">
+            <span class="material-symbols-outlined">done_all</span>
+            Marcar como Completado
+          </button>
+          }
+
+          <button class="btn-outline">Editar notas internas</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  }
+</div>
+
+@if (showToastEstado()) {
+<app-toast title="¡Estado actualizado!"
+  message="Se actualizó el estado de la devolución correctamente.">
+</app-toast>
+}

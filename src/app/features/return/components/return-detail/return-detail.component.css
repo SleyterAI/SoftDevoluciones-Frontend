@@ -1,0 +1,195 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.return-detail-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content-header {
+  margin-bottom: 1.5rem;
+}
+
+.content-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.section-desc {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.btn-back {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-back:hover {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border-color: #fed7aa;
+}
+
+/* =========================================
+   ESTILO DE LA TARJETA (CARD)
+   ========================================= */
+
+.detail-card-wrapper {
+  width: 100%;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.card-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0.15rem 0 0 0;
+}
+
+/* Grid de información en la tarjeta */
+.card-body-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.025em;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.fw-bold {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.price {
+  color: #ea580c;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* Badges de estado corporativos */
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge.success {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge.warning {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.badge.danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge.primary {
+  background-color: #fff7ed;
+  color: #c2410c;
+}
+
+/* Mensajes de carga o error */
+.mensaje-box {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mensaje {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.mensaje.error {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 600px) {
+  .card-body-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+}

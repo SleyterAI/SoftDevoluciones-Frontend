@@ -7,8 +7,8 @@ export interface ReturnRequest{
   orderDetail_id: number;
 }
 
-export interface Return{
-
+export interface ReturnEstadoRequest{
+  estado: string;
 }
 
 export interface ReturnClientResponse{

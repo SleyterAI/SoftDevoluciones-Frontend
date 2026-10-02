@@ -109,4 +109,12 @@ export class ReturnsComponent {
       toDate: formatDate(hasta)
     });
   }
+
+  onRevisarClick(return_id: number) {
+    this.router.navigate(['/admin/returns/check-detail', return_id]);
+  }
+
+  onVerClick(return_id: number) {
+    this.router.navigate(['/admin/returns/check-detail', return_id]);
+  }
 }

@@ -1,0 +1,61 @@
+<div class="return-detail-container">
+
+  <!-- Cabecera -->
+  <div class="content-header">
+    <button class="btn-back" routerLink="/my-returns">← Volver a devoluciones</button>
+    <h2>Detalle de devolución</h2>
+    <p class="section-desc">Información general y estado de tu solicitud.</p>
+  </div>
+
+  <!-- Contenedor Principal (Card) -->
+  <div class="detail-card-wrapper">
+    @if (returnResource.value(); as dev) {
+      <div class="card">
+
+        <!-- Cabecera de la Tarjeta -->
+        <div class="card-header-info">
+          <div>
+            <span class="card-subtitle">Solicitud</span>
+            <h3 class="card-title">{{ dev.return_id }}</h3>
+          </div>
+          <span class="badge" [ngClass]="getStatusClass(dev.status)">
+            {{ dev.status }}
+          </span>
+        </div>
+
+        <!-- Cuerpo de la Tarjeta (Grid de Información) -->
+        <div class="card-body-grid">
+          <div class="info-item">
+            <span class="info-label">Nº Compra asociada</span>
+            <span class="info-value fw-bold">{{ dev.order_id }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Fecha de solicitud</span>
+            <span class="info-value">{{ dev.date }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Estado</span>
+            <span class="info-value">{{ dev.status }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Total devolución</span>
+            <span class="info-value price">S/ {{ dev.returnTotal | number:'1.2-2' }}</span>
+          </div>
+        </div>
+
+      </div>
+    } @else if (returnResource.isLoading()) {
+      <div class="mensaje-box">
+        <p class="mensaje">Cargando detalles de la devolución...</p>
+      </div>
+    } @else if (returnResource.error()) {
+      <div class="mensaje-box">
+        <p class="mensaje error">Ocurrió un error al cargar el detalle.</p>
+      </div>
+    }
+  </div>
+
+</div>

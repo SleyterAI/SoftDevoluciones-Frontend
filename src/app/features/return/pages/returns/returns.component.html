@@ -64,11 +64,11 @@
             <td class="fw-bold">S/ {{ dev.returnTotal | number:'1.2-2' }}</td>
             <td class="text-right">
               @if (esRevisable(dev.status)) {
-                <button class="btn-action revisar">
+                <button class="btn-action revisar" (click)="onRevisarClick(dev.return_id)">
                   Revisar
                 </button>
               } @else {
-                <button class="btn-action ver">
+                <button class="btn-action ver" (click)="onVerClick(dev.return_id)">
                   Ver
                 </button>
               }
