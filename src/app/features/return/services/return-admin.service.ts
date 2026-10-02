@@ -33,6 +33,6 @@ export class ReturnAdminService {
   }
 
   updateReturnStatus(id: number, newStatus: string): Observable<string> {
-    return this.http.patch(`${this.apiUrl}/${id}/status`, newStatus, { responseType: 'text' });
+    return this.http.patch(`${this.apiUrl}/${id}/status`, { status: newStatus }, { responseType: 'text' });
   }
 }

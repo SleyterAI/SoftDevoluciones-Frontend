@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReturnAdminService } from '../../services/return-admin.service';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ReturnEstadoRequest } from '../../interfaces/return.interface';
 import { ToastComponent } from '../../../../components/toast/toast.component';
 import { TimeAgoPipe } from '../../../../core/pipes/time-ago.pipe';
@@ -10,7 +10,7 @@ import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-check-detail',
-  imports: [ToastComponent, TimeAgoPipe, DatePipe, NgClass, DecimalPipe],
+  imports: [RouterLink,ToastComponent, TimeAgoPipe, DatePipe, NgClass, DecimalPipe],
   templateUrl: './check-detail.component.html',
   styleUrl: './check-detail.component.css',
 })
@@ -62,7 +62,7 @@ export class CheckDetailComponent {
     const stepIndex = states.indexOf(stepName);
 
     // Si el ticket está RECHAZADO, absolutamente todos los pasos terminan en verde
-    if (currentEstado === 'RECHAZADO') {
+    if (currentEstado === 'RECHAZADO' || currentEstado === 'COMPLETADO') {
       return 'completed';
     }
 
@@ -87,7 +87,7 @@ export class CheckDetailComponent {
     const stepIndex = states.indexOf(stepName);
 
     // Si el ticket está cerrado, todas las líneas son verdes
-    if (currentEstado === 'RECHAZADO') {
+    if (currentEstado === 'RECHAZADO' || currentEstado === 'COMPLETADO') {
       return true;
     }
 
