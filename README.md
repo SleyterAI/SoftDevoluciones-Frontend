@@ -1,5 +1,4 @@
 # Sistema de Gestión de Devoluciones
-_______________________________________________________________
 Proyecto FullStack, que permite gestionar devoluciones mediante
 su creación, obtención y actualización, validación de estado en
 un workflow planificado. 
@@ -19,14 +18,6 @@ Correo: juan@gmail.com
 Contraseña: 12345678
 ```
 ## Tecnologías usadas
-##  Backend:
-- Java 21
-- Spring Boot 3
-- Spring Web
-- Spring Data JPA
-- Spring Security
-- JJWT
-
 ## Frontend:
 - Angular 20
 - Typescript
@@ -39,8 +30,6 @@ Contraseña: 12345678
 
 ## Herramientas:
 - VSC
-- IntelliJ IDEA
-- Postman
 - Git y GitHub
 - pnpm
 
@@ -63,17 +52,6 @@ Contraseña: 12345678
 - Lista general de usuarios
 
 ## Arquitectura 
-## Backend:
-- Controller
-- Service
-- Repository
-- Mapper
-- Dto
-- Entity
-- Cors
-- Security
-- GlobalException
-
 ## Frontend:
 - Components
 - core
@@ -97,33 +75,6 @@ Contraseña: 12345678
 	- services
 - shared
 
-## Colección de endpoints
-```bash
-ORDER: 
-	GET: http://localhost:8081/api/order/21, auth: token
-	GET: http://localhost:8081/api/order, auth: token
-	GET: http://localhost:8081/api/order/my-orders, auth: token
-	GET: http://localhost:8081/api/order/product/21/1
-LOGIN:
-	POST: http://localhost:8081/api/auth/login
-USER:
-	GET: http://localhost:8081/api/user
-```
-```bash
-RETURN:
-	CLIENTE:
-		GET: http://localhost:8081/api/return/my-returns, auth: token
-		POST: http://localhost:8081/api/return, auth: token
-		GET: http://localhost:8081/api/return/5
-	ADMIN:
-		PATCH: http://localhost:8081/api/admin/return/11/status
-			SOLICITADO -> EN_REVISION -> APROBADO -> COMPLETADO || RECHAZADO
-		PATCH: http://localhost:8081/api/admin/return/5/notes
-		GET: http://localhost:8081/api/admin/return/5
-		GET: http://localhost:8081/api/admin/return
-		GET: http://localhost:8081/api/admin/return/filter?
-			status=RECHAZADO&fromDate=29-08-2026&toDate=30-0
-```
 ## Ejecución del proyecto 
 Clonar del repositorio
 ```bash
@@ -138,11 +89,7 @@ pnpm install
 ng serve -o
 port: 4200
 ```
-## Backend:
-```bash
-mvn spring-boot:run || -> IntelliJ Idea
-port: 8081
-```
+
 ## Seguridad del proyecto
 Backend:
 Autenticación con JJWT y autorizacion roles en backend
