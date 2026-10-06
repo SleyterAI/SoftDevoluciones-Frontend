@@ -15,6 +15,8 @@ import { UsersComponent } from './features/user/components/users/users.component
 import { CreateReturnComponent } from './features/return/components/create-return/create-return.component';
 import { CheckDetailComponent } from './features/return/components/check-detail/check-detail.component';
 import { ViewDetailComponent } from './features/return/components/view-detail/view-detail.component';
+import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -25,6 +27,7 @@ export const routes: Routes = [
   },
   {
     path: '', component: FullPageComponent,
+    canActivate: [authGuard],
     children: [
       { path: '',redirectTo: 'start',pathMatch: 'full' },
       { path: 'start', component: StartComponent },
@@ -38,6 +41,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin', component: FullPageComponent,
+    canActivate: [adminGuard],
     children: [
       { path: '', redirectTo: 'returns', pathMatch: 'full' },
       { path: 'returns', component: ReturnsComponent },
