@@ -2,8 +2,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
 
-## Development server
+## Testing credentials
+ADMIN:
+Correo: admin@tienda.com
+Contraseña: 12345678
 
+CLIENTE:
+Correo: juan@gmail.com
+Contraseña: 12345678
 
 ## Development server
 
