@@ -1,6 +1,10 @@
-# SoftDevolucionesFrontend
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+# Sistema de Gestión de Devoluciones
+_______________________________________________________________
+Proyecto FullStack, que permite gestionar devoluciones mediante
+su creación, obtención y actualización, validación de estado en
+un workflow planificado. 
+Cuenta con validación de roles para cliente y admin
+para visualizar características únicas de admin.
 
 ## Testing credentials
 ```bash
@@ -14,58 +18,137 @@ CLIENTE:
 Correo: juan@gmail.com
 Contraseña: 12345678
 ```
-## Development server
+## Tecnologías usadas
+##  Backend:
+- Java 21
+- Spring Boot 3
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- JJWT
 
-To start a local development server, run:
+## Frontend:
+- Angular 20
+- Typescript
+- Interceptors 
+- Guards
+- Cookies
 
+## Base de datos:
+- PostgreSQL
+
+## Herramientas:
+- VSC
+- IntelliJ IDEA
+- Postman
+- Git y GitHub
+- pnpm
+
+## Funcionalidades:
+## Cliente:
+- Login
+- Visualización de sus compras
+- Visualización de una compra detalle
+- Solicitar devoluciones
+- Visualización de sus devoluciones
+
+## Admin - Operador:
+- Login
+- Lista general de compras 
+- Visualizacion de detalle de una compra
+- Lista general de devoluciones 
+- Actualizacion de estado de la devolucion
+- Actualizacion de notas de operador
+- Filtro de devoluciones por estado, fecha desde - hasta
+- Lista general de usuarios
+
+## Arquitectura 
+## Backend:
+- Controller
+- Service
+- Repository
+- Mapper
+- Dto
+- Entity
+- Cors
+- Security
+- GlobalException
+
+## Frontend:
+- Components
+- core
+	- interceptos
+	- guards
+	- pipes
+- environments
+- features
+	- order
+		- components
+		- interfaces
+		- pages
+		- services
+	- return
+	- start
+	- user
+- layout
+	- full-page
+	- sidebar
+	- topbar
+	- services
+- shared
+
+## Colección de endpoints
 ```bash
-ng serve
+ORDER: 
+	GET: http://localhost:8081/api/order/21, auth: token
+	GET: http://localhost:8081/api/order, auth: token
+	GET: http://localhost:8081/api/order/my-orders, auth: token
+	GET: http://localhost:8081/api/order/product/21/1
+LOGIN:
+	POST: http://localhost:8081/api/auth/login
+USER:
+	GET: http://localhost:8081/api/user
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
 ```bash
-ng generate component component-name
+RETURN:
+	CLIENTE:
+		GET: http://localhost:8081/api/return/my-returns, auth: token
+		POST: http://localhost:8081/api/return, auth: token
+		GET: http://localhost:8081/api/return/5
+	ADMIN:
+		PATCH: http://localhost:8081/api/admin/return/11/status
+			SOLICITADO -> EN_REVISION -> APROBADO -> COMPLETADO || RECHAZADO
+		PATCH: http://localhost:8081/api/admin/return/5/notes
+		GET: http://localhost:8081/api/admin/return/5
+		GET: http://localhost:8081/api/admin/return
+		GET: http://localhost:8081/api/admin/return/filter?
+			status=RECHAZADO&fromDate=29-08-2026&toDate=30-0
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+## Ejecución del proyecto 
+Clonar del repositorio
 ```bash
-ng generate --help
+git clone
 ```
-
-## Building
-
-To build the project run:
-
+## Instalar las dependencias
 ```bash
-ng build
+pnpm install
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+## Frontend:
 ```bash
-ng test
+ng serve -o
+port: 4200
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+## Backend:
 ```bash
-ng e2e
+mvn spring-boot:run || -> IntelliJ Idea
+port: 8081
 ```
+## Seguridad del proyecto
+Backend:
+Autenticación con JJWT y autorizacion roles en backend
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Frontend:
+Uso de cookie para validar la autenticación y rol
+Uso de guards para validar el rol
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Autor: Sleyter Astete Ibañez
