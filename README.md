@@ -3,14 +3,17 @@
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
 
 ## Testing credentials
+```bash
 ADMIN:
 Correo: admin@tienda.com
 Contraseña: 12345678
+```
 
+```bash
 CLIENTE:
 Correo: juan@gmail.com
 Contraseña: 12345678
-
+```
 ## Development server
 
 To start a local development server, run:
