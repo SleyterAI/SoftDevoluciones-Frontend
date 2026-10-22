@@ -5,6 +5,9 @@ un workflow planificado.
 Cuenta con validación de roles para cliente y admin
 para visualizar características únicas de admin.
 
+## BackEnd URL
+https://github.com/SleyterAI/SoftDevoluciones-Backend
+
 ## Testing credentials
 ```bash
 ADMIN:
